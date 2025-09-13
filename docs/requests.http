@@ -1,0 +1,33 @@
+### Auth
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "user1@test.com",
+  "password": "123456",
+  "name": "User One"
+}
+
+### Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "user1@test.com",
+  "password": "123456"
+}
+
+### Users (ADMIN)
+GET http://localhost:3000/users
+Authorization: Bearer {{access_token}}
+
+### Services (public)
+GET http://localhost:3000/services
+
+### Payments webhook (public)
+POST http://localhost:3000/payments/webhook
+Content-Type: application/json
+
+{}
+
+
