@@ -20,9 +20,13 @@ import { redisStore } from 'cache-manager-redis-store';
 import { BullModule } from '@nestjs/bullmq';
 // 👇 مهم تستورد Cache type من هنا
 import type { Cache } from 'cache-manager';
+import { PassportModule } from '@nestjs/passport';
+import { FacebookStrategy } from './auth/strategies/facebook.strategy';
+import { GoogleStrategy } from './auth/strategies/google.strategy';
 
 @Module({
   imports: [
+    PassportModule.register({ session: false }),
     CacheModule.registerAsync({
       isGlobal: true,
       useFactory: async () => ({
@@ -93,6 +97,8 @@ import type { Cache } from 'cache-manager';
   ],
   controllers: [],
   providers: [
+    GoogleStrategy,
+    FacebookStrategy,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

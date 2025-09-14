@@ -13,10 +13,10 @@ import { BookingsService } from './bookings.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
-import { CurrentUser } from 'src/auth/strategies/decorators/current-user.decorator';
-import { AuthGuard } from 'src/auth/strategies/Guards/auth.guard';
-import { Roles } from 'src/auth/strategies/decorators/user.decorator';
+import { AuthGuard } from 'src/common/Guards/auth.guard';
 import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
+import { Roles } from 'src/common/decorators/user.decorator';
 @UseInterceptors(CacheInterceptor) // cache لكل الريكويست
 @ApiTags('bookings')
 @ApiBearerAuth('access-token')

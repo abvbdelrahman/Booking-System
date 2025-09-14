@@ -13,8 +13,15 @@ export class AuthService {
     private emailService: EmailService,
   ) {}
 
+  async generateJwt(user: any) {
+    const payload = { sub: user.email, provider: user.provider };
+    return {
+      access_token: this.jwtService.sign(payload),
+      user,
+    };
+  }
   async register(createUserDto: CreateUserDto) {
-    const { email, password, phone, address, name } = createUserDto;
+    const { email, password, name } = createUserDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -60,7 +67,7 @@ export class AuthService {
     return { access_token: token };
   }
 
-  async logout(userId: number) {
+  async logout() {
     return { message: 'User logged out successfully' };
   }
 }

@@ -12,9 +12,9 @@ import {
 import { UsersService } from './users.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Roles } from 'src/auth/strategies/decorators/user.decorator';
-import { AuthGuard } from 'src/auth/strategies/Guards/auth.guard';
+import { AuthGuard } from 'src/common/Guards/auth.guard';
 import { CacheInterceptor, CacheKey, CacheTTL } from '@nestjs/cache-manager';
+import { Roles } from 'src/common/decorators/user.decorator';
 @UseInterceptors(CacheInterceptor) // cache لكل الريكويست
 @ApiTags('users')
 @ApiBearerAuth('access-token')

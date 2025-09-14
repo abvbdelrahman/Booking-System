@@ -1,9 +1,9 @@
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/auth/strategies/Guards/auth.guard';
-import { Roles } from 'src/auth/strategies/decorators/user.decorator';
+import { AuthGuard } from 'src/common/Guards/auth.guard';
 import { EmailService } from './notifications.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { EmailProducerService } from './producer.service';
+import { Roles } from 'src/common/decorators/user.decorator';
 
 @ApiTags('notifications')
 @ApiBearerAuth('access-token')

@@ -13,9 +13,9 @@ import { ServicesService } from './services.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
-import { Roles } from 'src/auth/strategies/decorators/user.decorator';
-import { AuthGuard } from 'src/auth/strategies/Guards/auth.guard';
+import { AuthGuard } from 'src/common/Guards/auth.guard';
 import { CacheInterceptor } from '@nestjs/cache-manager';
+import { Roles } from 'src/common/decorators/user.decorator';
 @UseInterceptors(CacheInterceptor) // cache لكل الريكويست
 @ApiTags('services')
 @ApiBearerAuth('access-token')

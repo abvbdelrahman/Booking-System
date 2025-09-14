@@ -1,9 +1,10 @@
-import { Body, Controller, Post, UseGuards, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Req } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import type { Request } from 'express';
-import { AuthGuard } from 'src/auth/strategies/Guards/auth.guard';
+import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
+import { AuthGuard as CustomAuthGuard } from 'src/common/Guards/auth.guard';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -20,9 +21,33 @@ export class AuthController {
 
   @Post('logout')
   @ApiBearerAuth('access-token')
-  @UseGuards(AuthGuard)
-  async logout(@Req() req: Request) {
-    const userId = (req as any)?.user?.sub as number;
-    return this.authService.logout(userId);
+  @UseGuards(CustomAuthGuard)
+  async logout() {
+    return this.authService.logout();
+  }
+
+  @Get('google')
+  @UseGuards(PassportAuthGuard('google'))
+  async googleAuth() {
+    // بيروح يعمل Redirect لجوجل
+  }
+
+  @Get('google/callback')
+  @UseGuards(PassportAuthGuard('google'))
+  googleAuthRedirect(@Req() req) {
+    return this.authService.generateJwt(req.user);
+  }
+
+  // --- Facebook ---
+  @Get('facebook')
+  @UseGuards(PassportAuthGuard('facebook'))
+  async facebookAuth() {
+    // بيروح يعمل Redirect لفيسبوك
+  }
+
+  @Get('facebook/callback')
+  @UseGuards(PassportAuthGuard('facebook'))
+  facebookAuthRedirect(@Req() req) {
+    return this.authService.generateJwt(req.user);
   }
 }
