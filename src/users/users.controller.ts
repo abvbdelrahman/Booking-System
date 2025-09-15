@@ -22,13 +22,13 @@ import { Roles } from 'src/common/decorators/user.decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('cache-test')
-  @CacheKey('my-test-key') // اسم الكاش
-  @CacheTTL(30) // TTL = 30 ثانية
-  async cacheTest() {
-    console.log('🎯 Executing cacheTest handler (بدون كاش)');
-    return { value: 'hello world', time: new Date().toISOString() };
-  }
+  // @Get('cache-test')
+  // @CacheKey('my-test-key') // اسم الكاش
+  // @CacheTTL(30) // TTL = 30 ثانية
+  // async cacheTest() {
+  //   console.log('🎯 Executing cacheTest handler (بدون كاش)');
+  //   return { value: 'hello world', time: new Date().toISOString() };
+  // }
 
   @UseGuards(AuthGuard)
   @Roles(['ADMIN'])
